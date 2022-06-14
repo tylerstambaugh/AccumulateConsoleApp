@@ -26,7 +26,13 @@
 
 
 int[] inputArray = new[] { 1, 4, 9 };
-//int[] outputArray = { 1, 2, 3 }.Accumulate(x => x * x);
+
+int[] outputArray = ((int[])new [] { 1, 2, 3 }.Accumulate(x => x * x));
+
+foreach (int i in outputArray)
+{
+    Console.WriteLine($"i = {i}");
+}
 
 Console.WriteLine("helloo world");
 Console.ReadLine();
@@ -35,6 +41,13 @@ public static class AccumulateExtensions
 {
     public static IEnumerable<U> Accumulate<T, U>(this IEnumerable<T> collection, Func<T, U> func)
     {
-        throw new NotImplementedException("You need to implement this function.");
+        List<U> returnList = new List<U>();
+
+        foreach (T item in collection)
+        {
+            returnList.Add(func(item));
+        }
+        return returnList.ToList();
     }
+
 }
